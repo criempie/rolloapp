@@ -1,0 +1,34 @@
+[
+  {
+    "imageSrc": "https://www.billboard.com/wp-content/uploads/media/madonna-live-london-2015-billboard-650.jpg?w=650",
+    "title": "Madonna",
+    "category": "Concert",
+    "location": "Beach House Club",
+    "price": "50",
+    "date": "Today"
+  },
+  {
+    "imageSrc": "http://www.pcot.permp.ru/png/apo.png",
+    "title": "Rafting down a mountain river",
+    "category": "Guided Tours",
+    "location": "Nature",
+    "price": "400",
+    "date": "2 June"
+  },
+  {
+    "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbfSrtzxmFR78b53KOtCQEQsfKDbBKCNyqsrG6azXjkAL_8Lr",
+    "title": "Hustle",
+    "category": "Cinema",
+    "location": "Cinema Park",
+    "price": "80",
+    "date": "2 June"
+  },
+  {
+    "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbfSrtzxmFR78b53KOtCQEQsfKDbBKCNyqsrG6azXjkAL_8Lr",
+    "title": "Hustle",
+    "category": "Cinema",
+    "location": "Cinema Park",
+    "price": "80",
+    "date": "2 June"
+  }
+]

@@ -1,7 +1,14 @@
-import SubCategory from './subCategory'
+import SubCategory     from './subCategory'
+import { useCallback } from 'react'
 
 const CategoryCard = (props) => {
-	const { imageSrc, title, subCategories } = props
+	const { imageSrc, title, subCategories, onSelect, onUnselect } = props
+
+	const handleSelect = useCallback((event) => {
+		if (event?.target) {
+			event.target.checked ? onSelect(event.target.value) : onUnselect(event.target.value)
+		}
+	}, [onSelect, onUnselect])
 
 	return (
 		<div className="bg-slate-900 whaaaat group break-inside-avoid mt-16 overflow-hidden rounded-2xl">
@@ -17,7 +24,9 @@ const CategoryCard = (props) => {
 
 			<div className="p-8 ">
 				<ul className="flex gap-3 flex-wrap">
-					{subCategories.map(c => <SubCategory label={c.name} key={c.id} />)}
+					<form onChange={handleSelect}>
+						{subCategories.map(c => <SubCategory label={c.name} id={c.id} key={c.id} />)}
+					</form>
 				</ul>
 			</div>
 
