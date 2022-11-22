@@ -1,1 +1,1 @@
-export const REST_URL = 'http://localhost:5000'
+export const REST_URL = 'http://213.189.219.49:5000'
