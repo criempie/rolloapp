@@ -8,6 +8,8 @@ import { useNavigate }                                       from 'react-router-
 const initialState = []
 
 const reducer = (state, action) => {
+	console.log(action)
+
 	switch (action.type) {
 		case 'init': {
 			return Object.entries(action.payload)

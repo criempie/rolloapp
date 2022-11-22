@@ -3,6 +3,7 @@ import React from 'react'
 
 import { useCallback, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { REST_URL } from '../config'
 
 const Signup = (props) => {
 	const { } = props
@@ -49,7 +50,9 @@ const Signup = (props) => {
 	}, [valuesRef])
 
 	const sendValues = useCallback((values) => {
-		axios.post("http://localhost:5000/regform", values)
+		const url = new URL('regform', REST_URL)
+
+		axios.post(url.href, values)
 			.then(() => navigate("/"))
 			.catch(e => {
 				if (axios.isAxiosError(e) && e.response?.statusText) setError(e.response?.statusText)

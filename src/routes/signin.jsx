@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useCallback, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { REST_URL } from '../config'
 
 const Signin = (props) => {
 	const { } = props
@@ -36,7 +37,9 @@ const Signin = (props) => {
 	}, [valuesRef])
 
 	const sendValues = useCallback((values) => {
-		axios.post("http://localhost:5000/loginform", values)
+		const url = new URL('loginform', REST_URL)
+
+		axios.post(url.href, values)
 			.then(() => navigate("/"))
 			.catch(e => {
 				if (axios.isAxiosError(e) && e.response?.statusText) setError(e.response?.statusText)
