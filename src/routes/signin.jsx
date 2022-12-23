@@ -49,7 +49,7 @@ const Signin = (props) => {
 
     axios
       .post(url.href, values, { withCredentials: true })
-      .then(() => navigate("/"))
+      .then(() => navigate("/events"))
       .catch((e) => {
         if (axios.isAxiosError(e) && e.response?.statusText)
           setError(e.response?.statusText);

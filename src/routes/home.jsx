@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 const initialState = [];
 
 const reducer = (state, action) => {
-  console.log(action);
-
   switch (action.type) {
     case "init": {
       return Object.entries(action.payload).map(([id, type]) => ({
@@ -61,10 +59,14 @@ const Home = (props) => {
   }, []);
 
   const handleClickEventPage = useCallback(() => {
+    if (selectedSubTypes.current.length === 0) return;
+
     const url = new URL("test_show", REST_URL);
     axios
       .post(url.href, selectedSubTypes.current, { withCredentials: true })
-      .then(() => navigate("/events"));
+      .then((events) =>
+        navigate("/events", { state: { events: events.data } })
+      );
   }, []);
 
   return (
