@@ -1,67 +1,121 @@
 import axios from "axios";
-import React, { useCallback } from "react";
+import "./index.css";
+import React, { useCallback, useState } from "react";
 import { REST_URL } from "../../config";
+import { useNavigate } from "react-router-dom";
 
 const Event = (props) => {
-  const {
-    category,
-    imageSrc,
-    date,
-    title,
-    location,
-    price,
-    innerId,
-    deleteEvent,
-  } = props;
+  const { event, deleteEvent, onClick, onBack, showFullInfo } = props;
   const marksUrl = new URL("save_marks", REST_URL);
 
+  const [liked, setLiked] = useState(false);
+  const navigate = useNavigate();
+
   const onLike = useCallback(() => {
-    axios.post(marksUrl.href, { [innerId]: 4 }, { withCredentials: true });
-  }, []);
+    axios
+      .post(marksUrl.href, { [event.innerId]: 4 }, { withCredentials: true })
+      .then(() => setLiked(true));
+  }, [event.innerId, setLiked]);
 
   const onCross = useCallback(() => {
     axios
-      .post(marksUrl.href, { [innerId]: 1 }, { withCredentials: true })
+      .post(marksUrl.href, { [event.innerId]: 1 }, { withCredentials: true })
       .then(() => {
-        deleteEvent && deleteEvent(innerId);
+        deleteEvent && deleteEvent(event.innerId);
       });
+  }, [deleteEvent, event.innerId]);
+
+  const onBuyTicket = useCallback(() => {
+    axios.post(
+      marksUrl.href,
+      { [event.innerId]: 5 },
+      { withCredentials: true }
+    );
+  }, [event.innerId, event.aflink, navigate]);
+
+  const onPhone = useCallback(() => {
+    axios.post(
+      marksUrl.href,
+      { [event.innerId]: 5 },
+      { withCredentials: true }
+    );
+  }, []);
+
+  const onAddress = useCallback(() => {
+    axios.post(
+      marksUrl.href,
+      { [event.innerId]: 5 },
+      { withCredentials: true }
+    );
   }, []);
 
   return (
-    <span className="bg-white flex flex-col group hover:-translate-y-4 transition-all duration-300 overflow-hidden rounded-2xl isolate">
+    <span
+      onClick={onClick}
+      className="bg-white flex flex-col group hover:-translate-y-4 transition-all duration-300 overflow-hidden rounded-2xl isolate"
+    >
       <div className="relative overflow-hidden isolate">
         <img
-          src={imageSrc}
+          src={event.fololink}
           className="h-64 group-hover:scale-110 transition-all duration-300 object-top bg-slate-900 w-full -z-10 object-cover"
         />
-        <span className="absolute group-hover:bg-violet-500 top-4 left-4 rounded-full bg-violet-600/60 font-bold px-5 py-2 text-white font-custom text-sm backdrop-blur-md uppercase letter tracking-wide">
-          {category}
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="event-button"
+            style={{ top: "1rem", left: "1rem", position: "absolute" }}
+          >
+            <img src="images/arrow.svg" />
+          </button>
+        )}
+        <span
+          style={{ left: onBack && "calc(1rem + 36px + 8px)" }}
+          className="absolute group-hover:bg-violet-500 top-4 left-4 rounded-full bg-violet-600/60 font-bold px-5 py-2 text-white font-custom text-sm backdrop-blur-md uppercase letter tracking-wide"
+        >
+          {event.ty}
         </span>
+        <div className="buttons-container">
+          {!liked && (
+            <button onClick={onLike} className="event-button">
+              <img src="images/save.svg" />
+            </button>
+          )}
+          <button onClick={onCross} className="event-button">
+            <img src="images/cross.svg" />
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-1 p-5 justify-between flex-col">
         <div className="mb-5">
-          <p className="text-slate-500 mb-3">{date}</p>
+          <p className="text-slate-500 mb-3">{event.dt}</p>
           <h2 className="text-xl group-hover:text-purple-600 text-purple-500 font-bold font-custom">
-            {title}
+            {event.name}
           </h2>
-          <p className="text-slate-500">{location}</p>
-          <button
-            onClick={onLike}
-            style={{ border: "1px solid black", padding: ".3em" }}
-          >
-            Лайк
-          </button>
-          <button
-            onClick={onCross}
-            style={{ border: "1px solid black", padding: ".3em" }}
-          >
-            Крест
-          </button>
+          <p className="text-slate-500">{event.place}</p>
         </div>
-        <p className="text-xl font-bold">${price}</p>
+        <p className="text-xl font-bold">${event.price}</p>
         {/* {+price === 0 && <p className="text-xl text-emerald-500 font-bold">Free</p>}
 				{+price !== 0 && <p className="text-xl font-bold">${price}</p>} */}
+        {showFullInfo && (
+          <>
+            <div style={{ marginTop: "1em" }}>
+              <a href={event.aflink} className="button" onClick={onBuyTicket}>
+                Купить билет
+              </a>
+              <button className="button" onClick={onPhone}>
+                {event.phone}
+              </button>
+              <button className="button" onClick={onAddress}>
+                {event.adress}
+              </button>
+            </div>
+            <div style={{ marginTop: "1em" }}>
+              <h3>О событии</h3>
+              <p>{event.descant}</p>
+            </div>
+          </>
+        )}
       </div>
     </span>
   );

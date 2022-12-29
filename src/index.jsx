@@ -6,6 +6,7 @@ import "./computedStyles/tailwind.output.css";
 import Signin from "./routes/signin";
 import Signup from "./routes/signup";
 import Events from "./routes/events";
+import EventFull from "./routes/eventFull";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,6 +22,7 @@ root.render(
           <Route path={"/signin"} element={<Signin />} />
           <Route path={"/signup"} element={<Signup />} />
           <Route path={"/events"} element={<Events />} />
+          <Route path={"/event"} element={<EventFull />} />
         </Routes>
       </div>
     </BrowserRouter>
