@@ -51,8 +51,7 @@ const Signin = (props) => {
       .post(url.href, values, { withCredentials: true })
       .then(() => navigate("/events"))
       .catch((e) => {
-        if (axios.isAxiosError(e) && e.response?.statusText)
-          setError(e.response?.statusText);
+        if (axios.isAxiosError(e)) setError(e.response?.data?.msg);
         else setError("Internal server error");
       });
   }, []);
