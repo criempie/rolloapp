@@ -31,6 +31,12 @@ const Event = (props) => {
       { [event.innerId]: 5 },
       { withCredentials: true }
     );
+
+    if (event.aflink) {
+      window.location.replace(event.aflink);
+    } else {
+      navigate("/events");
+    }
   }, [event.innerId, event.aflink, navigate]);
 
   const onPhone = useCallback(() => {
@@ -100,7 +106,7 @@ const Event = (props) => {
         {showFullInfo && (
           <>
             <div style={{ marginTop: "1em" }}>
-              <a href={event.aflink} className="button" onClick={onBuyTicket}>
+              <a className="button" onClick={onBuyTicket}>
                 Купить билет
               </a>
               <button className="button" onClick={onPhone}>

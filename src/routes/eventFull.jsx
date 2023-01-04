@@ -29,7 +29,6 @@ const EventFull = () => {
   }, [navigate]);
 
   const onBack = useCallback(() => {
-    console.log(Date.now() - enterTime.current);
     if (Date.now() - enterTime.current <= 5000) {
       const marksUrl = new URL("save_marks", REST_URL);
       axios.post(

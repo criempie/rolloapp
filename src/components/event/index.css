@@ -27,3 +27,7 @@
   border-radius: 20px;
   padding: 0.1em 1em;
 }
+
+.button:hover {
+  cursor: pointer;
+}
