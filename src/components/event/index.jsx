@@ -5,7 +5,8 @@ import { REST_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 
 const Event = (props) => {
-  const { event, deleteEvent, onClick, onBack, showFullInfo } = props;
+  const { event, deleteEvent, onClick, onBack, showFullInfo, likeIsHide } =
+    props;
   const marksUrl = new URL("save_marks", REST_URL);
 
   const [liked, setLiked] = useState(false);
@@ -91,7 +92,7 @@ const Event = (props) => {
           {event.ty}
         </span>
         <div className="buttons-container">
-          {!liked && (
+          {!likeIsHide && !liked && (
             <button onClick={onLike} className="event-button">
               <img src="images/save.svg" />
             </button>

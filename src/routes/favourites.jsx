@@ -52,6 +52,7 @@ const Favourites = (props) => {
         {events.map((e, i) => (
           <Event
             event={e}
+            likeIsHide
             deleteEvent={deleteEvent}
             onClick={() => navigateToFullEvent(e)}
             key={e.innerId}
