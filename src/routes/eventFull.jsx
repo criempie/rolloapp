@@ -42,13 +42,15 @@ const EventFull = () => {
   }, [navigate, onClose]);
 
   return (
-    <Event
-      event={event}
-      deleteEvent={onClose}
-      key={event.innerId}
-      onBack={onBack}
-      showFullInfo
-    />
+    <div style={{ minHeight: "83vh" }}>
+      <Event
+        event={event}
+        deleteEvent={onClose}
+        key={event.innerId}
+        onBack={onBack}
+        showFullInfo
+      />
+    </div>
   );
 };
 

@@ -11,19 +11,29 @@ const Event = (props) => {
   const [liked, setLiked] = useState(false);
   const navigate = useNavigate();
 
-  const onLike = useCallback(() => {
-    axios
-      .post(marksUrl.href, { [event.innerId]: 4 }, { withCredentials: true })
-      .then(() => setLiked(true));
-  }, [event.innerId, setLiked]);
+  const onLike = useCallback(
+    (e) => {
+      e.stopPropagation();
 
-  const onCross = useCallback(() => {
-    axios
-      .post(marksUrl.href, { [event.innerId]: 1 }, { withCredentials: true })
-      .then(() => {
-        deleteEvent && deleteEvent(event.innerId);
-      });
-  }, [deleteEvent, event.innerId]);
+      axios
+        .post(marksUrl.href, { [event.innerId]: 4 }, { withCredentials: true })
+        .then(() => setLiked(true));
+    },
+    [event.innerId, setLiked]
+  );
+
+  const onCross = useCallback(
+    (e) => {
+      e.stopPropagation();
+
+      axios
+        .post(marksUrl.href, { [event.innerId]: 1 }, { withCredentials: true })
+        .then(() => {
+          deleteEvent && deleteEvent(event.innerId);
+        });
+    },
+    [deleteEvent, event.innerId]
+  );
 
   const onBuyTicket = useCallback(() => {
     axios.post(
@@ -56,7 +66,7 @@ const Event = (props) => {
   }, []);
 
   return (
-    <span
+    <div
       onClick={onClick}
       className="bg-white flex flex-col group hover:-translate-y-4 transition-all duration-300 overflow-hidden rounded-2xl isolate"
     >
@@ -87,7 +97,7 @@ const Event = (props) => {
             </button>
           )}
           <button onClick={onCross} className="event-button">
-            <img src="images/cross.svg" />
+            <img src="images/trash.svg" />
           </button>
         </div>
       </div>
@@ -123,7 +133,7 @@ const Event = (props) => {
           </>
         )}
       </div>
-    </span>
+    </div>
   );
 };
 

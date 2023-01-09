@@ -10,6 +10,9 @@ const Header = (props) => {
         <img src="./images/logo.webp" className={"w-24 sm:w-40"} alt="Logo" />
       </Link>
       <div className="flex gap-5">
+        <Link to={"/favourites"}>
+          <span className={"text-purple-600 hover:opacity-70"}>Favourites</span>
+        </Link>
         <Link to={"/signin"}>
           <span className={"text-purple-600 hover:opacity-70"}>Sign in</span>
         </Link>
