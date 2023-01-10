@@ -38,7 +38,7 @@ const Events = (props) => {
         { withCredentials: true }
       );
       navigate("/event", {
-        state: { event },
+        state: { event, isFavourite: false },
       });
     },
     [navigate, deleteEvent]

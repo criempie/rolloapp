@@ -48,7 +48,7 @@ const EventFull = () => {
     <div style={{ minHeight: "83vh" }}>
       <Event
         event={event}
-        isFavourite
+        isFavourite={isFavourite}
         deleteEvent={onClose}
         key={event.innerId}
         onBack={onBack}
