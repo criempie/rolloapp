@@ -30,15 +30,8 @@ const Favourites = (props) => {
 
   const navigateToFullEvent = useCallback(
     (event) => {
-      const marksUrl = new URL("save_marks", REST_URL);
-
-      axios.post(
-        marksUrl.href,
-        { [event.innerId]: 3 },
-        { withCredentials: true }
-      );
       navigate("/event", {
-        state: { event },
+        state: { event, isFavourite: true },
       });
     },
     [navigate, deleteEvent]
@@ -52,7 +45,7 @@ const Favourites = (props) => {
         {events.map((e, i) => (
           <Event
             event={e}
-            likeIsHide
+            isFavourite
             deleteEvent={deleteEvent}
             onClick={() => navigateToFullEvent(e)}
             key={e.innerId}

@@ -22,7 +22,7 @@ const EventFull = () => {
 
   if (!state || !state.event) return;
 
-  const { event } = state;
+  const { event, isFavourite } = state;
 
   const onClose = useCallback(() => {
     navigate(-1);
@@ -31,11 +31,14 @@ const EventFull = () => {
   const onBack = useCallback(() => {
     if (Date.now() - enterTime.current <= 5000) {
       const marksUrl = new URL("save_marks", REST_URL);
-      axios.post(
-        marksUrl.href,
-        { [event.innerId]: 2 },
-        { withCredentials: true }
-      );
+
+      if (!isFavourite) {
+        axios.post(
+          marksUrl.href,
+          { [event.innerId]: 2 },
+          { withCredentials: true }
+        );
+      }
     }
 
     onClose();
@@ -45,6 +48,7 @@ const EventFull = () => {
     <div style={{ minHeight: "83vh" }}>
       <Event
         event={event}
+        isFavourite
         deleteEvent={onClose}
         key={event.innerId}
         onBack={onBack}
